@@ -12,8 +12,8 @@ export class Component{
                     for(const styleKey in options.style)
                         element.style[styleKey] = options.style[styleKey]
                 } else {
-                    if(key.includes('-') || key == 'redirect') element.setAttribute(key, options[prop][key])
-                    else element[key] = options[prop][key]
+                    if(element[key]) options[prop][key]
+                    else element.setAttribute(key, options[prop][key])
                     if(key === 'isLink' && options[prop][key] === true)
                         element.setAttribute('role', 'link')
                 }
