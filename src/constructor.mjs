@@ -39,3 +39,29 @@ export class Component{
         }
     }
 }
+
+
+/*
+To do
+*/
+export class Meta{
+    constructor(props, other){
+        const {type, ...rest} = props
+        for(const key in rest){
+            const valideKeys = ['itemscope','itemtype','itemid','itemprop','itemref','name','content','href','src','alt','title','rel','type','property','sameAs','speakable']
+            const invalideKey = !valideKeys.includes(key)
+            if(invalideKey){
+                throw Error(`
+                    Invalide key in 'class Meta constructor'
+                    Make sur all your keys are supported by <meta> HTML tag
+                    There's a list of supported meta keys :
+                    [${`'`+valideKeys.join(`', '`)+`'`}]`)
+
+            }
+        }
+        return new Component(type, {
+            ...other,
+            prop: { ...rest }
+        })
+    }
+};

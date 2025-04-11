@@ -22,9 +22,24 @@ export const variants = {
 
         }
     ),
-    //to do
-    // circle : {},
-    // rounded : {},
-    // link : {},
-    // disable : {},
+    link : (...props) => (
+        {
+            
+        }
+    ),
+    circle : (...props) => (
+        {
+            
+        }
+    ),
+    rounded : (...props) => (
+        {
+            
+        }
+    ),
+    disable : (...props) => (
+        {
+            
+        }
+    ),
 }

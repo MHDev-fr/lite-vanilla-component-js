@@ -1,17 +1,24 @@
-import { Component } from "../src/constructor.mjs";
-
-const meta = ({type : type, itemprop : itemprop, content : content}) => new Component(type, {
-        prop:{
-            'itemprop' : itemprop,
-            'content' : content,
-        }
-})
+import { Component, Meta } from "../src/constructor.mjs";
 
 const product = new Component('article', {
     childs : [
-        meta({type : 'meta', itemprop : 'name', content : 'Name'}),
-        meta({type : 'meta', itemprop : 'description', content : 'Product description'}),
-        meta({type : 'meta', itemprop : 'url', content : 'https://www.sitename.com/product=1'}),
+        new Meta({type : 'meta', itemprop : 'name', content : 'Name'}),
+        new Meta({type : 'meta', itemprop : 'description', content : 'Product description'}),
+        new Meta({type : 'link', itemprop : 'url', href : 'https://www.sitename.com/product=1'}),
+        new Meta(
+            {
+                type : 'div', 
+                itemprop : 'reviewRating', 
+                itemscope : '',
+                itemtype:'https://schema.org/Rating"',
+            },
+            {
+                childs : [
+                    new Meta({type : 'meta', itemprop : 'bestRating', content : '5'}),
+                    new Meta({type : 'meta', itemprop : 'worstRating', content : '1'}),
+                    new Meta({type : 'meta', itemprop : 'ratingValue', content : '4.5'}),]
+            }
+        ),
     ],
     prop : {
         'itemscope' : '',
