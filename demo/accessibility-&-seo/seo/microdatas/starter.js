@@ -10,9 +10,9 @@ const meta_url = new Component('meta',{
     'content' : 'url/of/your/product' 
 })
 /* Rating */
-const min_rate = new Component('meta', {'property' : 'worstRating','content' : '1' })
-const max_rate = new Component('meta', {'property' : 'bestRating','content' : '5' })
-const current_rate = new Component('meta', {'property' : 'ratingValue','content' : '4' })
+const min_rate = new Component('meta', {'itemprop' : 'worstRating','content' : '1' })
+const max_rate = new Component('meta', {'itemprop' : 'bestRating','content' : '5' })
+const current_rate = new Component('meta', {'itemprop' : 'ratingValue','content' : '4' })
 const meta_rate = new Component('div',{
     'itemscope' : true,
     'itemtype' : 'https://schema.org/Rating',

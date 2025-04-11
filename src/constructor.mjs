@@ -1,5 +1,8 @@
 export class Component{
     constructor(tag, options){
+        if(!tag){
+            throw new Error(`All component need an HTML tag. (error in 'class Component')`)
+        }
         this.element = document.createElement(tag)
         if(options)
             this.#handleProps(options, this.element)
@@ -34,15 +37,23 @@ export class Component{
             ? document.querySelector(options.parent).appendChild(element) 
             : options.parent.appendChild(element)
         if(options.childs){
-            for(const child of options.childs)
-                element.appendChild(child)
+            //adding a new verification
+            if(!Array.isArray(options.childs)){
+                throw new Error(`
+                    Error in 'class Component options'
+                    options.childs must be an array.
+                    Make sur your options.childs is an array.
+                    Verification => Array.isArray(options.childs) : ${Array.isArray(options.childs)}
+                    typeof options.childs : ${typeof options.childs}`)
+            } else {
+                for(const child of options.childs)
+                    element.appendChild(child)
+            }
         }
     }
 }
-
-
 /*
-To do
+To finish
 */
 export class Meta{
     constructor(props, other){
@@ -53,10 +64,11 @@ export class Meta{
             if(invalideKey){
                 throw Error(`
                     Invalide key in 'class Meta constructor'
-                    Make sur all your keys are supported by <meta> HTML tag
+                    Make sur all your keys are supported by <meta> or <link> HTML tag / or Schema.org 
                     There's a list of supported meta keys :
-                    [${`'`+valideKeys.join(`', '`)+`'`}]`)
-
+                    [${`'`+valideKeys.join(`', '`)+`'`}]
+                    This is your key : 
+                    ${key}`)
             }
         }
         return new Component(type, {

@@ -1,4 +1,4 @@
-import { Component, Meta } from "../src/constructor.mjs";
+import { Component, Meta } from "../../../../src/constructor.mjs";
 
 /*
     Exemple of microdatas implementation for SEO with the class 'Meta'
