@@ -1,7 +1,8 @@
 export class Component{
     constructor(tag, options){
         if(!tag){
-            throw new Error(`All component need an HTML tag. (error in 'class Component')`)
+            throw new Error(`Error in 'class Component'
+                All component need an HTML tag.`)
         }
         this.element = document.createElement(tag)
         if(options)
@@ -37,10 +38,9 @@ export class Component{
             ? document.querySelector(options.parent).appendChild(element) 
             : options.parent.appendChild(element)
         if(options.childs){
-            //adding a new verification
             if(!Array.isArray(options.childs)){
                 throw new Error(`
-                    Error in 'class Component options'
+                    Error in 'class Component (options)'
                     options.childs must be an array.
                     Make sur your options.childs is an array.
                     Verification => Array.isArray(options.childs) : ${Array.isArray(options.childs)}
@@ -63,7 +63,7 @@ export class Meta{
             const invalideKey = !valideKeys.includes(key)
             if(invalideKey){
                 throw Error(`
-                    Invalide key in 'class Meta constructor'
+                    Invalide key in 'class Meta (constructor)'
                     Make sur all your keys are supported by <meta> or <link> HTML tag / or Schema.org 
                     There's a list of supported meta keys :
                     [${`'`+valideKeys.join(`', '`)+`'`}]
