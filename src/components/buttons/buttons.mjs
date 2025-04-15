@@ -1,33 +1,32 @@
 import { Component } from '../../constructor.mjs'
-import { variants } from './utils.mjs'
-
-const mandatoryPropForBtn = ['textContent']
+import { variants, hovering } from './utils.mjs'
 
 //not finish
 export class Button{
-    constructor({
-        mandatory : {},
-        options : {},
-    }){
-        for(const key in mandatory){
-            const mandatoryMissing = !mandatoryPropForBtn.includes(key)
-            if(mandatoryMissing) 
-                return console.error(`Missing mandatory key in 'Button.constructor.mandatory{}'`)
+    constructor(options){
+        this.animations = null;
+        if(options.style.animations)
+            this.animations = options.style.animations
+        if(options.style.variants){
+            options.style = variants[options.style.variants]({...options.style.props})
         }
-        if(options){
-            this.options = {...options}
-            this.options.textContent = mandatory.textContent
-            this.style;
-            if(this.options.style){
-                if(this.options.style.variants){
-                    this.variantStyle = {...this.options.style.variants}
-                    this.style = variants[this.options.style.variants.name]
-                }
-                else this.style = this.options.style
-                this.options.style = this.style
-            }
+        console.log('options', options)
+        this.button = new Component('button',{...options})
+        if(this.animations && hovering[this.animations])
+            hovering[this.animations](this.button)
+        else if(typeof this.animations !== 'string')
+            throw Error(`
+                Animation property has to be a string make sur your code is valide
+                typeof your animation : ${typeof this.animations}
+            `)
+        else if(this.animations && !hovering[this.animations]){
+            throw Error(`
+                Your animation setting isn't reconized as a valide property, make your you have a valide animation property
+                Animations list : 
+                ['${['default', 'smooth'].join(`', '`)}']
+                Your animation : ${this.animations}
+            `)
         }
-        this.button = options ? new Component('button',{...this.options}) : new Component('button')
         return this.button
     }
 }
